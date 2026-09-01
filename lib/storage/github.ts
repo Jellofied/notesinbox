@@ -1,4 +1,5 @@
 import { createEntryId } from "@/lib/id";
+import { formatIndiaISO } from "@/lib/time";
 import type { Attachment, CreateInboxInput, InboxEntry, InboxStatus } from "@/lib/types";
 
 const GITHUB_API = "https://api.github.com";
@@ -152,7 +153,7 @@ export async function createInboxEntry(
   const cfg = getConfig();
   const now = new Date();
   const id = createEntryId(now);
-  const createdAt = now.toISOString();
+  const createdAt = formatIndiaISO(now);
 
   const attachments: Attachment[] = [];
   if (input.attachments && input.attachments.length > 0) {
@@ -266,7 +267,7 @@ export async function updateInboxEntry(
   if (updates.processingNotes !== undefined) {
     entry.processingNotes = updates.processingNotes;
   }
-  entry.updatedAt = new Date().toISOString();
+  entry.updatedAt = formatIndiaISO(new Date());
 
   const md = buildMarkdown(entry);
   await githubFetch(`/contents/${encodeURIComponent(path)}`, {
