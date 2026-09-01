@@ -49,6 +49,9 @@ GITHUB_REPO=notesinbox
 # GITHUB_BRANCH=main
 # GITHUB_INBOX_PATH=inbox
 # GITHUB_ATTACHMENTS_PATH=attachments
+
+# Optional: server timezone (the app hard-codes Asia/Kolkata)
+# TZ=Asia/Kolkata
 ```
 
 ### GitHub token setup
