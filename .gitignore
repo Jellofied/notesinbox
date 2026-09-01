@@ -34,6 +34,10 @@ yarn-error.log*
 .env*
 !.env.example
 
+# local utility scripts that read secrets
+scripts/clear-inbox.js
+scripts/ensure-folders.js
+
 # vercel
 .vercel
 
