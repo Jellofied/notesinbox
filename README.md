@@ -89,7 +89,7 @@ Each capture becomes a Markdown file with YAML frontmatter:
 
 ```md
 ---
-id: "2026-09-02-184211-a7f3"
+id: "Note_1842_02_09_2026"
 createdAt: "2026-09-02T18:42:11+05:30"
 source: "web"
 status: "unprocessed"

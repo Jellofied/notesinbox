@@ -222,10 +222,8 @@ export async function getInboxEntries(options?: {
     throw err;
   }
 
-  items.sort((a, b) => b.name.localeCompare(a.name));
-
   const entries: InboxEntry[] = [];
-  for (const item of items.slice(0, limit)) {
+  for (const item of items) {
     try {
       const res = await githubFetch(
         `/contents/${encodeURIComponent(item.path)}?ref=${cfg.branch}`
@@ -239,14 +237,17 @@ export async function getInboxEntries(options?: {
     }
   }
 
+  entries.sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+
+  let result = entries;
   if (search) {
-    return entries.filter(
+    result = entries.filter(
       (e) =>
         e.content.toLowerCase().includes(search) ||
         e.id.toLowerCase().includes(search)
     );
   }
-  return entries;
+  return result.slice(0, limit);
 }
 
 export async function updateInboxEntry(
