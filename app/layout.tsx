@@ -13,6 +13,7 @@ export const metadata: Metadata = {
   title: "Notes",
   description: "A private pocket for thoughts and tasks.",
   icons: {
+    icon: "/favicon.svg",
     apple: "/apple-icon.png",
   },
   appleWebApp: {
