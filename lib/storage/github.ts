@@ -89,12 +89,12 @@ function parseFrontmatter(text: string): {
   frontmatter: Record<string, string>;
   body: string;
 } {
-  const match = text.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/);
+  const match = text.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/);
   if (!match) {
     return { frontmatter: {}, body: text.trim() };
   }
   const frontmatter: Record<string, string> = {};
-  for (const line of match[1].split("\n")) {
+  for (const line of match[1].split(/\r?\n/)) {
     const idx = line.indexOf(":");
     if (idx <= 0) continue;
     const key = line.slice(0, idx).trim();
