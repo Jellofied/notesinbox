@@ -1,14 +1,19 @@
 import { NextResponse } from "next/server";
-import {
-  createInboxEntry,
-  getInboxEntries,
-} from "@/lib/storage/github";
-import type { CreateInboxInput } from "@/lib/types";
+import { createInboxEntry, getInboxEntries } from "@/lib/storage/github";
+import type { CreateInboxInput, NoteCategory } from "@/lib/types";
+
+const CATEGORIES: NoteCategory[] = ["office", "personal", "miscellaneous"];
+
+function isCategory(value: unknown): value is NoteCategory {
+  return typeof value === "string" && CATEGORIES.includes(value as NoteCategory);
+}
 
 export async function POST(request: Request) {
   try {
     const body = (await request.json()) as CreateInboxInput;
     const content = typeof body.content === "string" ? body.content.trim() : "";
+    const title =
+      typeof body.title === "string" ? body.title.trim() || undefined : undefined;
     if (!content && (!body.attachments || body.attachments.length === 0)) {
       return NextResponse.json(
         { error: "Content or an attachment is required" },
@@ -16,8 +21,10 @@ export async function POST(request: Request) {
       );
     }
     const entry = await createInboxEntry({
+      title,
       content: content || "",
       attachments: body.attachments || [],
+      category: isCategory(body.category) ? body.category : undefined,
     });
     return NextResponse.json({ entry }, { status: 201 });
   } catch (error) {

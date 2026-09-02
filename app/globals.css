@@ -1,8 +1,16 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
     "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+  --color-black: #131313;
+  --color-cream: #d3d4cf;
+  --color-yellow: #f9cd62;
+  --color-green: #cbd87e;
+  --color-purple: #b692fc;
+  --color-red: #ec5951;
+  --color-white: #ffffff;
 }
 
 @utility pt-safe-top {
@@ -22,9 +30,37 @@
 }
 
 html {
-  background-color: #fafaf9;
+  background-color: #131313;
 }
 
 body {
   -webkit-tap-highlight-color: transparent;
+  font-family: var(--font-dm-sans), "DM Sans", ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-slide-up {
+  animation: slideUp 0.3s ease-out forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.2s ease-out forwards;
 }

@@ -1,5 +1,5 @@
-import { InboxPage } from "@/app/components/inbox-page";
+import { NotesPage } from "@/app/components/notes-page";
 
 export default function Home() {
-  return <InboxPage />;
+  return <NotesPage />;
 }

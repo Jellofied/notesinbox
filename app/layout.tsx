@@ -1,23 +1,24 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import { DM_Sans } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({
+const dmSans = DM_Sans({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-inter",
+  variable: "--font-dm-sans",
+  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
-  title: "Inbox",
-  description: "A private pocket for thoughts.",
+  title: "Notes",
+  description: "A private pocket for thoughts and tasks.",
   icons: {
     apple: "/apple-icon.png",
   },
   appleWebApp: {
     capable: true,
-    title: "Inbox",
-    statusBarStyle: "default",
+    title: "Notes",
+    statusBarStyle: "black-translucent",
   },
 };
 
@@ -25,7 +26,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
-  themeColor: "#fafaf9",
+  themeColor: "#131313",
 };
 
 export default function RootLayout({
@@ -34,8 +35,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={inter.variable}>
-      <body className="bg-stone-50 text-stone-900 antialiased">{children}</body>
+    <html lang="en" className={dmSans.variable}>
+      <body className="bg-black text-cream antialiased">{children}</body>
     </html>
   );
 }
