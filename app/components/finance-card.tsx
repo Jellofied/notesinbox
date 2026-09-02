@@ -29,7 +29,7 @@ export function FinanceCard({
 
   return (
     <article
-      className={`relative rounded-[2rem] p-5 shadow-sm ${meta.bg} ${meta.text} ${
+      className={`relative flex flex-col rounded-[2rem] p-5 shadow-sm ${meta.bg} ${meta.text} ${
         isExpanded ? "min-h-[220px]" : "h-[120px]"
       }`}
       style={{ filter: dim !== undefined ? `brightness(${dim})` : undefined }}
@@ -67,7 +67,7 @@ export function FinanceCard({
       )}
 
       {isExpanded && (
-        <div className="mt-4 flex items-center justify-end gap-3">
+        <div className="mt-auto flex items-center justify-end gap-3 pt-4">
           <button
             type="button"
             onClick={() => onToggleType(log)}
