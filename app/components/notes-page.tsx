@@ -6,6 +6,7 @@ import {
   ChevronUpIcon,
   PlusIcon,
   RupeeIcon,
+  XIcon,
 } from "./icons";
 import { NoteCard } from "./note-card";
 import { FinanceCard, cycleFinanceType } from "./finance-card";
@@ -480,9 +481,17 @@ export function NotesPage() {
       {actionError && (
         <div
           role="alert"
-          className="mb-3 shrink-0 rounded-2xl border border-rose-200 bg-rose-50 px-4 py-2 text-sm text-rose-700"
+          className="mb-3 flex shrink-0 items-center justify-between gap-3 rounded-2xl border border-rose-200 bg-rose-50 px-4 py-2 text-sm text-rose-700"
         >
-          {actionError}
+          <span>{actionError}</span>
+          <button
+            type="button"
+            onClick={() => setActionError(null)}
+            className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-rose-600 hover:bg-rose-100"
+            aria-label="Dismiss error"
+          >
+            <XIcon className="h-3.5 w-3.5" />
+          </button>
         </div>
       )}
 
@@ -490,10 +499,22 @@ export function NotesPage() {
         {itemsError ? (
           <div
             role="alert"
-            className="rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-700"
+            className="flex items-start justify-between gap-3 rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-700"
           >
-            <p className="font-medium">Couldn&apos;t load {isNotesMode ? "notes" : "logs"}</p>
-            <p className="mt-0.5 text-rose-600">{itemsError}</p>
+            <div>
+              <p className="font-medium">Couldn&apos;t load {isNotesMode ? "notes" : "logs"}</p>
+              <p className="mt-0.5 text-rose-600">{itemsError}</p>
+            </div>
+            <button
+              type="button"
+              onClick={() =>
+                isNotesMode ? setNotesError(null) : setFinanceError(null)
+              }
+              className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-rose-600 hover:bg-rose-100"
+              aria-label="Dismiss error"
+            >
+              <XIcon className="h-3.5 w-3.5" />
+            </button>
           </div>
         ) : loadingItems ? (
           <div className="flex flex-col justify-end space-y-[-3.5rem]">
@@ -587,10 +608,20 @@ export function NotesPage() {
         {tasksError ? (
           <div
             role="alert"
-            className="rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-700"
+            className="flex items-start justify-between gap-3 rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-700"
           >
-            <p className="font-medium">Couldn&apos;t load tasks</p>
-            <p className="mt-0.5 text-black/70">{tasksError}</p>
+            <div>
+              <p className="font-medium">Couldn&apos;t load tasks</p>
+              <p className="mt-0.5 text-black/70">{tasksError}</p>
+            </div>
+            <button
+              type="button"
+              onClick={() => setTasksError(null)}
+              className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-rose-600 hover:bg-rose-100"
+              aria-label="Dismiss error"
+            >
+              <XIcon className="h-3.5 w-3.5" />
+            </button>
           </div>
         ) : loadingTasks ? (
           <div className="space-y-2">
