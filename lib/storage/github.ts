@@ -89,25 +89,34 @@ function parseFrontmatter(text: string): {
   frontmatter: Record<string, string>;
   body: string;
 } {
-  const match = text.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/);
-  if (!match) {
+  let remaining = text.trimStart();
+  const frontmatter: Record<string, string> = {};
+  let found = false;
+
+  while (remaining.startsWith("---")) {
+    const match = remaining.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?/);
+    if (!match) break;
+    for (const line of match[1].split(/\r?\n/)) {
+      const idx = line.indexOf(":");
+      if (idx <= 0) continue;
+      const key = line.slice(0, idx).trim();
+      let value = line.slice(idx + 1).trim();
+      if (
+        (value.startsWith('"') && value.endsWith('"')) ||
+        (value.startsWith("'") && value.endsWith("'"))
+      ) {
+        value = value.slice(1, -1);
+      }
+      frontmatter[key] = value;
+    }
+    remaining = remaining.slice(match[0].length).trimStart();
+    found = true;
+  }
+
+  if (!found) {
     return { frontmatter: {}, body: text.trim() };
   }
-  const frontmatter: Record<string, string> = {};
-  for (const line of match[1].split(/\r?\n/)) {
-    const idx = line.indexOf(":");
-    if (idx <= 0) continue;
-    const key = line.slice(0, idx).trim();
-    let value = line.slice(idx + 1).trim();
-    if (
-      (value.startsWith('"') && value.endsWith('"')) ||
-      (value.startsWith("'") && value.endsWith("'"))
-    ) {
-      value = value.slice(1, -1);
-    }
-    frontmatter[key] = value;
-  }
-  return { frontmatter, body: match[2].trim() };
+  return { frontmatter, body: remaining };
 }
 
 function parseAttachmentsFromBody(body: string): Attachment[] {
