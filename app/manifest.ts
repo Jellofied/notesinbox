@@ -2,13 +2,13 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Inbox",
-    short_name: "Inbox",
-    description: "A private pocket for thoughts.",
+    name: "Notes",
+    short_name: "Notes",
+    description: "A private pocket for thoughts and tasks.",
     start_url: "/",
     display: "standalone",
-    background_color: "#fafaf9",
-    theme_color: "#fafaf9",
+    background_color: "#131313",
+    theme_color: "#131313",
     orientation: "portrait",
     icons: [
       {

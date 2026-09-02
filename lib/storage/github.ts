@@ -204,7 +204,7 @@ export async function createInboxEntry(
     source: "web",
     status: "unprocessed",
     attachments,
-    category: input.category,
+    category: input.category || "miscellaneous",
   };
 
   const md = buildMarkdown(entry);
