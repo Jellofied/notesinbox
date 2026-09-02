@@ -36,7 +36,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={dmSans.variable}>
-      <body className="bg-black text-cream antialiased">{children}</body>
+      <body className="bg-[#131313] text-cream antialiased">{children}</body>
     </html>
   );
 }
